@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  vouch-proxy:
+    image: voucher/vouch-proxy:alpine
+    ports:
+      - "9090:9090"
+    restart: always
+    volumes:
+      - "../config/:/config/"
+      - "../data/:/data/"
+    command: /vouch-proxy

@@ -30,6 +30,7 @@ If Vouch is running on the same host as the Nginx reverse proxy the response tim
 
 ## Installation
 
+- tape `make` in the terminal
 - `cp ./config/config.yml_example ./config/config.yml`
 - create OAuth credentials for Vouch Proxy at [google](https://console.developers.google.com/apis/credentials) or [github](https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/)
   - be sure to direct the callback URL to the `/auth` endpoint
@@ -135,6 +136,12 @@ server {
 An example of using Vouch Proxy with Nginx cacheing of the proxied validation request is available in [issue #76](https://github.com/vouch/vouch-proxy/issues/76#issuecomment-464028743).
 
 Additional Nginx configurations can be found in the [examples](https://github.com/vouch/vouch-proxy/tree/master/examples) directory.
+
+## Running from docker-compose
+
+```bash
+make docker
+```
 
 ## Running from Docker
 
