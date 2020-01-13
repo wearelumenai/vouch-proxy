@@ -1,6 +1,6 @@
 DOCKER=docker-compose -f deployments/docker-compose.yml
 
-all: docker-build build test
+all: build docker-build test
 
 build:
 	./do.sh goget
@@ -10,7 +10,10 @@ start:
 	./vouch-proxy
 
 docker:
-	$(DOCKER) up ${args} vouch-proxy
+	$(DOCKER) up ${args} clusauth
+
+docker-dev:
+	$(DOCKER) up ${args} clusauth-dev
 
 docker-build:
 	$(DOCKER) build ${args}

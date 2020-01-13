@@ -1,11 +1,20 @@
 version: '3.7'
 services:
-  vouch-proxy:
+  clusauth:
     image: voucher/vouch-proxy:alpine
+    container_name: clusauth
     ports:
-      - "9090:9090"
+      - "8004:9090"
     restart: always
     volumes:
       - "../config/:/config/"
       - "../data/:/data/"
-    command: /vouch-proxy
+  clusauth-dev:
+    image: voucher/vouch-proxy:alpine
+    container_name: clusauth-dev
+    ports:
+      - "8014:9090"
+    restart: always
+    volumes:
+      - "../config/:/config/"
+      - "../data/:/data/"
