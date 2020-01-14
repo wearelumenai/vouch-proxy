@@ -1,6 +1,6 @@
 DOCKER=docker-compose -f deployments/docker-compose.yml
 
-all: build docker-build test
+all: build test
 
 build:
 	./do.sh goget
@@ -10,10 +10,7 @@ start:
 	./vouch-proxy
 
 docker:
-	$(DOCKER) up ${args} clusauth
-
-docker-dev:
-	$(DOCKER) up ${args} clusauth-dev
+	$(DOCKER) up ${args}
 
 docker-build:
 	$(DOCKER) build ${args}
@@ -25,4 +22,5 @@ docker-down:
 	$(DOCKER) down ${args}
 
 # .PHONY is used for reserving tasks words
-.PHONY: build start docker docker-build docker-stop docker-down
+.PHONY: build start \
+	docker docker-build docker-stop docker-down
