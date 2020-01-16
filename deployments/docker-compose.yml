@@ -9,5 +9,5 @@ services:
     volumes:
       - "../config/:/config/"
       - "../data/:/data/"
-    environmemnt:
+    environment:
       COMPOSE_PROJECT_NAME: clusapp
