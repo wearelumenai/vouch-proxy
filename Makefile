@@ -1,4 +1,4 @@
-DOCKER=docker-compose -p clusapp -f deployments/docker-compose.yml
+DOCKER=docker-compose -f deployments/docker-compose.yml
 
 all: build test
 
