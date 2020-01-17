@@ -8,4 +8,4 @@ services:
     restart: always
     volumes:
       - "../config/:/config/"
-      - "../data/clusauth/:/data/"
+      - "../data/:/data/"
