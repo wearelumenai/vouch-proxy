@@ -137,12 +137,6 @@ An example of using Vouch Proxy with Nginx cacheing of the proxied validation re
 
 Additional Nginx configurations can be found in the [examples](https://github.com/vouch/vouch-proxy/tree/master/examples) directory.
 
-## Running from docker-compose
-
-```bash
-make docker
-```
-
 ## Running from Docker
 
 ```bash
@@ -157,6 +151,14 @@ docker run -d \
 The [voucher/vouch-proxy](https://hub.docker.com/r/voucher/vouch-proxy/) Docker image is an automated build on Docker Hub. In addition to `voucher/vouch-proxy:latest` which is based on [scratch](https://docs.docker.com/samples/library/scratch/) there is an [alpine](https://docs.docker.com/samples/library/alpine/) based `voucher/vouch-proxy:alpine` as well as versioned images as `voucher/vouch-proxy:x.y.z` and `voucher/vouch-proxy:x.y.z_alpine`.
 
 [https://hub.docker.com/r/voucher/vouch-proxy/builds/](https://hub.docker.com/r/voucher/vouch-proxy/builds/)
+
+## Running from docker-compose
+
+```bash
+make docker
+```
+
+Database files are saved in `data/clusauth/`
 
 ## Kubernetes Nginx Ingress
 
