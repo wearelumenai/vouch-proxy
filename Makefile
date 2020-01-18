@@ -33,6 +33,9 @@ docker-stop:
 docker-down:
 	$(DOCKER) down ${args}
 
+docker-logs:
+	$(DOCKER) logs ${args}
+
 docker-dev:
 	$(DOCKER_DEV) up ${args}
 
@@ -45,7 +48,10 @@ docker-dev-stop:
 docker-dev-down:
 	$(DOCKER_DEV) down ${args}
 
+docker-dev-logs:
+	$(DOCKER_DEV) logs ${args}
+
 # .PHONY is used for reserving tasks words
 .PHONY: build start dev \
-	docker docker-build docker-stop docker-down
-	docker-dev docker-dev-build docker-dev-stop docker-dev-down
+	docker docker-build docker-stop docker-down docker-logs \
+	docker-dev docker-dev-build docker-dev-stop docker-dev-down docker-dev-logs
