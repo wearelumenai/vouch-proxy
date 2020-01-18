@@ -156,9 +156,13 @@ The [voucher/vouch-proxy](https://hub.docker.com/r/voucher/vouch-proxy/) Docker 
 
 ```bash
 make docker
+# or dev mode / hot-reload
+make docker-dev
 ```
 
-Database files are saved in `data/clusauth/`
+> Other commands are `make docker[-dev]-(build|stop|down|logs)`
+
+Database files are saved in `data/`
 
 ## Kubernetes Nginx Ingress
 
