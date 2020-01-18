@@ -1,4 +1,6 @@
-DOCKER=docker-compose -p clusapp -f deployments/docker-compose.yml
+DOCK=docker-compose -p clusapp
+DOCKER=$(DOCK) -f deployments/docker-compose.yml
+DOCKER_DEV=$(DOCK) -f deployments/docker-compose.dev.yml
 
 all: build test
 
@@ -6,8 +8,18 @@ build:
 	./do.sh goget
 	./do.sh build
 
+install: build
+	./do.sh install
+
+test:
+	./do.sh test
+	./do.sh coverage
+
 start:
-	./vouch-proxy
+	vouch
+
+dev:
+	./do.sh watch
 
 docker:
 	$(DOCKER) up ${args}
@@ -21,6 +33,19 @@ docker-stop:
 docker-down:
 	$(DOCKER) down ${args}
 
+docker-dev:
+	$(DOCKER_DEV) up ${args}
+
+docker-dev-build:
+	$(DOCKER_DEV) build ${args}
+
+docker-dev-stop:
+	$(DOCKER_DEV) stop ${args}
+
+docker-dev-down:
+	$(DOCKER_DEV) down ${args}
+
 # .PHONY is used for reserving tasks words
-.PHONY: build start \
+.PHONY: build start dev \
 	docker docker-build docker-stop docker-down
+	docker-dev docker-dev-build docker-dev-stop docker-dev-down

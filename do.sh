@@ -52,11 +52,11 @@ drun () {
       docker rm $NAME
    fi
 
-   CMD="docker run --rm -i -t 
-    -p ${HTTPPORT}:${HTTPPORT} 
-    --name $NAME 
-    -v ${SDIR}/config:/config 
-    -v ${SDIR}/data:/data 
+   CMD="docker run --rm -i -t
+    -p ${HTTPPORT}:${HTTPPORT}
+    --name $NAME
+    -v ${SDIR}/config:/config
+    -v ${SDIR}/data:/data
     $IMAGE $* "
 
     echo $CMD
@@ -89,14 +89,14 @@ bug_report() {
   CONFIG=config/config.yml
   REDACT=$*
 
-  if [ -z "$REDACT" ]; then 
+  if [ -z "$REDACT" ]; then
     cat <<EOF
 
     bug_report cleans the ${CONFIG} and the Vouch Proxy logs of secrets and any additional strings (usually domains and email addresses)
 
     usage:
 
-      $0 bug_report redacted_string redacted_string 
+      $0 bug_report redacted_string redacted_string
 
 EOF
     exit 1;
@@ -120,7 +120,7 @@ _redact_exit () {
 }
 
 _redact() {
-  SECRET_FIELDS=("client_id client_secret secret")
+  SECRET_FIELDS="client_id client_secret secret"
   while IFS= read -r LINE; do
     for i in $SECRET_FIELDS; do
       LINE=$(echo "$LINE" | sed -r "s/${i}..[[:graph:]]*\>/${i}: XXXXXXXXXXX/g")
