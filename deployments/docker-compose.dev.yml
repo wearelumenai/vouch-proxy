@@ -8,12 +8,12 @@ services:
     image: clusauth:dev
     container_name: clusauth-dev
     ports:
-      - "9090:9090"
+      - 9090:9090
     restart: always
     volumes:
-      - "../handlers:/${GOPATH}/src/github.com/vouch/vouch-proxy/handlers/"
-      - "../pkg:/${GOPATH}/src/github.com/vouch/vouch-proxy/pkg/"
-      - "../static:/${GOPATH}/src/github.com/vouch/vouch-proxy/static/"
-      - "../templates:/${GOPATH}/src/github.com/vouch/vouch-proxy/templates/"
-      - "../config/:${GOPATH}/src/github.com/vouch/vouch-proxy/config/"
-      - "../data/:${GOPATH}/src/github.com/vouch/vouch-proxy/data/"
+      - ../handlers:/${GOPATH}/src/github.com/vouch/vouch-proxy/handlers/
+      - ../pkg:/${GOPATH}/src/github.com/vouch/vouch-proxy/pkg/
+      - ../static:/${GOPATH}/src/github.com/vouch/vouch-proxy/static/
+      - ../templates:/${GOPATH}/src/github.com/vouch/vouch-proxy/templates/
+      - ../config/:${GOPATH}/src/github.com/vouch/vouch-proxy/config/
+      - ../data/:${GOPATH}/src/github.com/vouch/vouch-proxy/data/

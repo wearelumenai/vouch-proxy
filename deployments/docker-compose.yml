@@ -8,8 +8,8 @@ services:
     image: clusauth
     container_name: clusauth
     ports:
-      - "9090:9090"
+      - 9091:9090
     restart: always
     volumes:
-      - "../config/:/config/"
-      - "../data/:/data/"
+      - ../config/:/config/
+      - ../data/:/data/
