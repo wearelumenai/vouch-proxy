@@ -4,7 +4,7 @@ FROM golang:1.10 AS builder
 
 WORKDIR ${GOPATH}/src/github.com/vouch/vouch-proxy
 
-COPY . .
+COPY . /go/src/github.com/vouch/vouch-proxy/
 
 # RUN go-wrapper download  # "go get -d -v ./..."
 # RUN ./do.sh build    # see `do.sh` for vouch build details
@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install entr
 
 CMD ["sh", "do.sh", "watch"]
 
-FROM alpine:latest as prod
+FROM alpine:3.11.3 as prod
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY templates/ templates/
