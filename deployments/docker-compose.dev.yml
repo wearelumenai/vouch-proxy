@@ -11,9 +11,11 @@ services:
       - 9090:9090
     restart: always
     volumes:
-      - ${CLUSAUTH_HANDLERS-../handlers/}:/${GOPATH}/src/github.com/vouch/vouch-proxy/handlers/
-      - ${CLUSAUTH_PKG-../pkg/}:/${GOPATH}/src/github.com/vouch/vouch-proxy/pkg/
-      - ${CLUSAUTH_STATIC-../static/}:/${GOPATH}/src/github.com/vouch/vouch-proxy/static/
-      - ${CLUSAUTH_TEMPLATES-../templates/}:/${GOPATH}/src/github.com/vouch/vouch-proxy/templates/
-      - ${CLUSAUTH_CONFIG-../config/}:${GOPATH}/src/github.com/vouch/vouch-proxy/config/
-      - ${CLUSAUTH_DATA-../data/}:${GOPATH}/src/github.com/vouch/vouch-proxy/data/
+      - ${CLUSAUTH_HANDLERS-../handlers/}:/go/src/github.com/vouch/vouch-proxy/handlers/
+      - ${CLUSAUTH_PKG-../pkg/}:/go/src/github.com/vouch/vouch-proxy/pkg/
+      - ${CLUSAUTH_STATIC-../static/}:/go/src/github.com/vouch/vouch-proxy/static/
+      - ${CLUSAUTH_TEMPLATES-../templates/}:/go/src/github.com/vouch/vouch-proxy/templates/
+      - ${CLUSAUTH_CONFIG-../config/}:/go/src/github.com/vouch/vouch-proxy/config/
+      - ${CLUSAUTH_DATA-../data/}:/go/src/github.com/vouch/vouch-proxy/data/
+      - ${CLUSAUTH_DO-../do.sh}:/go/src/github.com/vouch/vouch-proxy/do.sh
+      - ${CLUSAUTH_MAIN-../main.go}:/go/src/github.com/vouch/vouch-proxy/main.go
