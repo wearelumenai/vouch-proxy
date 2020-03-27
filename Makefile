@@ -88,6 +88,14 @@ docker-down:
 docker-logs:
 	$(DOCKER) logs -f ${args}
 
+.PHONY: docker-restart
+docker-restart:
+	$(DOCKER) restart ${args}
+
+.PHONY: docker-config
+docker-config:
+	$(DOCKER) config ${args}
+
 .PHONY: docker-dev-up
 docker-dev-up:
 	$(DOCKER_DEV) up -d ${args}
@@ -107,3 +115,11 @@ docker-dev-down:
 .PHONY: docker-dev-logs
 docker-dev-logs:
 	$(DOCKER_DEV) logs -f ${args}
+
+.PHONY: docker-dev-restart
+docker-dev-restart:
+	$(DOCKER_DEV) restart -f ${args}
+
+.PHONY: docker-dev-config
+docker-dev-config:
+	$(DOCKER_DEV) config -f ${args}
