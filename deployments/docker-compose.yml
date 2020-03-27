@@ -2,13 +2,12 @@ version: '3.7'
 services:
   clusauth:
     build:
-      context: ..
-      dockerfile: ./build/Dockerfile
-      target: prod
+      context: ${CLUSAUTH_CONTEXT-..}
+      dockerfile: ${CLUSAUTH_DOCKERFILE-./build/Dockerfile}
     image: clusauth
     container_name: clusauth
     ports:
-      - 9091:9090
+      - ${CLUSAUTH_PORT-8003}:9090
     restart: always
     volumes:
       - ${CLUSAUTH_CONFIG-../config/}:/config/

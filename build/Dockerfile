@@ -1,8 +1,8 @@
 # voucher/vouch-proxy
 # https://github.com/vouch/vouch-proxy
-FROM golang:1.10 AS builder
+FROM golang:1.13.6-alpine3.11 AS builder
 
-WORKDIR ${GOPATH}/src/github.com/vouch/vouch-proxy
+WORKDIR /go/src/github.com/vouch/vouch-proxy
 
 COPY . /go/src/github.com/vouch/vouch-proxy/
 
@@ -10,19 +10,10 @@ COPY . /go/src/github.com/vouch/vouch-proxy/
 # RUN ./do.sh build    # see `do.sh` for vouch build details
 # RUN go-wrapper install # "go install -v ./..."
 
-RUN ./do.sh goget && ./do.sh gobuildstatic && ./do.sh install
+RUN apk update && apk upgrade && apk add --no-cache bash git openssh make && \
+  make build install
 
-FROM builder AS dev
-
-EXPOSE 9090
-
-ENV TERM xterm
-
-RUN apt-get update && apt-get install entr
-
-CMD ["sh", "do.sh", "watch"]
-
-FROM alpine:3.11.3 as prod
+FROM alpine:3.11.3
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY templates/ templates/

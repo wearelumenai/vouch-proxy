@@ -1,0 +1,21 @@
+# voucher/vouch-proxy
+# https://github.com/vouch/vouch-proxy
+FROM golang:1.13.6-alpine3.11 AS builder
+
+WORKDIR /go/src/github.com/vouch/vouch-proxy
+
+COPY . .
+
+# RUN go-wrapper download  # "go get -d -v ./..."
+# RUN ./do.sh build    # see `do.sh` for vouch build details
+# RUN go-wrapper install # "go install -v ./..."
+
+RUN apk update && apk upgrade && apk add --no-cache bash git openssh make autoconf automake libtool gettext gettext-dev g++ texinfo curl && \
+  make build install && wget https://github.com/emcrisostomo/fswatch/releases/download/1.14.0/fswatch-1.14.0.tar.gz && \
+  tar -xf fswatch-1.14.0.tar.gz && rm fswatch-1.14.0.tar.gz && \
+  cd /go/src/github.com/vouch/vouch-proxy/fswatch-1.14.0 && ./configure && make && make install && cd - && rm -rf fswatch-1.14.0 && \
+  cp /go/bin/vouch-proxy /go/src/github.com/vouch/vouch-proxy/vouch-proxy && rm /go/bin/vouch-proxy
+
+EXPOSE 9090
+
+ENTRYPOINT ["make", "dev"]

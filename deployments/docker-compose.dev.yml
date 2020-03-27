@@ -2,13 +2,12 @@ version: '3.7'
 services:
   clusauth:
     build:
-      context: ..
-      dockerfile: ./build/Dockerfile
-      target: dev
+      context: ${CLUSAUTH_CONTEXT-..}
+      dockerfile: ${CLUSAUTH_DOCKERFILE-./build/Dockerfile}
     image: clusauth:dev
     container_name: clusauth-dev
     ports:
-      - 9090:9090
+      - ${CLUSAUTH_PORT-8003}:9090
     restart: always
     volumes:
       - ${CLUSAUTH_HANDLERS-../handlers/}:/go/src/github.com/vouch/vouch-proxy/handlers/
@@ -17,4 +16,3 @@ services:
       - ${CLUSAUTH_TEMPLATES-../templates/}:/go/src/github.com/vouch/vouch-proxy/templates/
       - ${CLUSAUTH_CONFIG-../config/}:/go/src/github.com/vouch/vouch-proxy/config/
       - ${CLUSAUTH_DATA-../data/}:/go/src/github.com/vouch/vouch-proxy/data/
-      
