@@ -68,58 +68,74 @@ dev: start-pid
 # dev:
 	# ./do.sh watch
 
+.PHONY: docker-cmd
+docker-cmd:
+	$(DOCKER) $(cmd) $(args)
+
 .PHONY: docker-up
 docker-up:
-	$(DOCKER) up -d ${args}
+	cmd=up args="$(args)" make docker-cmd
 
 .PHONY: docker-build
 docker-build:
-	$(DOCKER) build ${args}
+	cmd=build args="$(args)" make docker-cmd
 
 .PHONY: docker-stop
 docker-stop:
-	$(DOCKER) stop ${args}
+	cmd=stop args="$(args)" make docker-cmd
 
 .PHONY: docker-down
 docker-down:
-	$(DOCKER) down ${args}
+	cmd=down args="$(args)" make docker-cmd
 
 .PHONY: docker-logs
 docker-logs:
-	$(DOCKER) logs -f ${args}
+	cmd=logs args="$(args)" make docker-cmd
 
 .PHONY: docker-restart
 docker-restart:
-	$(DOCKER) restart ${args}
+	cmd=restart args="$(args)" make docker-cmd
 
 .PHONY: docker-config
 docker-config:
-	$(DOCKER) config ${args}
+	cmd=config args="$(args)" make docker-cmd
+
+.PHONY: docker-tty
+docker-tty:
+	cmd=exec args="$(args) clusauth /bin/sh" make docker-cmd
+
+.PHONY: docker-dev-cmd
+docker-dev-cmd:
+	$(DOCKER_DEV) $(cmd) $(args)
 
 .PHONY: docker-dev-up
 docker-dev-up:
-	$(DOCKER_DEV) up -d ${args}
+	cmd=up args="$(args)" make docker-dev-cmd
 
 .PHONY: docker-dev-build
 docker-dev-build:
-	$(DOCKER_DEV) build ${args}
+	cmd=build args="$(args)" make docker-dev-cmd
 
 .PHONY: docker-dev-stop
 docker-dev-stop:
-	$(DOCKER_DEV) stop ${args}
+	cmd=stop args="$(args)" make docker-dev-cmd
 
 .PHONY: docker-dev-down
 docker-dev-down:
-	$(DOCKER_DEV) down ${args}
+	cmd=down args="$(args)" make docker-dev-cmd
 
 .PHONY: docker-dev-logs
 docker-dev-logs:
-	$(DOCKER_DEV) logs -f ${args}
+	cmd=logs args="$(args)" make docker-dev-cmd
 
 .PHONY: docker-dev-restart
 docker-dev-restart:
-	$(DOCKER_DEV) restart -f ${args}
+	cmd=restart args="$(args)" make docker-dev-cmd
 
 .PHONY: docker-dev-config
 docker-dev-config:
-	$(DOCKER_DEV) config -f ${args}
+	cmd=config args="$(args)" make docker-dev-cmd
+
+.PHONY: docker-dev-tty
+docker-dev-tty:
+	cmd=exec args="$(args) clusauth /bin/sh" make docker-dev-comd

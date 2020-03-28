@@ -160,7 +160,7 @@ make docker
 make docker-dev
 ```
 
-> Other commands are `make docker[-dev]-(build|stop|down|logs|restart|config)`
+> Other commands are `make docker[-dev]-(build|stop|down|logs|restart|config|tty|cmd)`
 
 Database files are saved in `data/`
 
