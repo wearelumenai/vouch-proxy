@@ -12,3 +12,4 @@ services:
     volumes:
       - ${CLUSAUTH_CONFIG-../config/}:/config/
       - ${CLUSAUTH_DATA-../data/}:/data/
+    env_file: ${CLUSAUTH_ENV-.env}

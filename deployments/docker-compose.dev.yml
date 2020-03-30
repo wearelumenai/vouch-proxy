@@ -16,3 +16,4 @@ services:
       - ${CLUSAUTH_TEMPLATES-../templates/}:/go/src/github.com/vouch/vouch-proxy/templates/
       - ${CLUSAUTH_CONFIG-../config/}:/go/src/github.com/vouch/vouch-proxy/config/
       - ${CLUSAUTH_DATA-../data/}:/go/src/github.com/vouch/vouch-proxy/data/
+    env_file: ${CLUSAUTH_ENV-.env}
