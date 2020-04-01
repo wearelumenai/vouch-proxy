@@ -2,18 +2,17 @@ version: '3.7'
 services:
   clusauth:
     build:
-      context: ${CLUSAUTH_CONTEXT-..}
+      context: ${CLUSAUTH_CONTEXT-../}
       dockerfile: ${CLUSAUTH_DOCKERFILE-./build/Dockerfile}
-    image: clusauth:dev
-    container_name: clusauth-dev
+    image: ${CLUSAUTH_IMAGE-clusauth:dev}
+    container_name: ${CLUSAUTH_CONTAINER-clusauth-dev}
     ports:
       - ${CLUSAUTH_PORT-8003}:9090
     restart: always
     volumes:
-      - ${CLUSAUTH_HANDLERS-../handlers/}:/go/src/github.com/vouch/vouch-proxy/handlers/
-      - ${CLUSAUTH_PKG-../pkg/}:/go/src/github.com/vouch/vouch-proxy/pkg/
-      - ${CLUSAUTH_STATIC-../static/}:/go/src/github.com/vouch/vouch-proxy/static/
-      - ${CLUSAUTH_TEMPLATES-../templates/}:/go/src/github.com/vouch/vouch-proxy/templates/
+      - ${CLUSAUTH_CONTEXT-../}handlers/:/go/src/github.com/vouch/vouch-proxy/handlers/
+      - ${CLUSAUTH_CONTEXT-../}pkg/:/go/src/github.com/vouch/vouch-proxy/pkg/
+      - ${CLUSAUTH_CONTEXT-../}static/:/go/src/github.com/vouch/vouch-proxy/static/
+      - ${CLUSAUTH_CONTEXT-../}templates/:/go/src/github.com/vouch/vouch-proxy/templates/
       - ${CLUSAUTH_CONFIG-../config/}:/go/src/github.com/vouch/vouch-proxy/config/
       - ${CLUSAUTH_DATA-../data/}:/go/src/github.com/vouch/vouch-proxy/data/
-    env_file: ${CLUSAUTH_ENV-.env}
