@@ -1,0 +1,11 @@
+FROM voucher/vouch-proxy:alpine AS dev
+
+COPY configs/ config/
+COPY static/ static/
+COPY templates/ templates/
+
+FROM voucher/vouch-proxy AS prod
+
+COPY configs/ config/
+COPY static/ static/
+COPY templates/ templates/

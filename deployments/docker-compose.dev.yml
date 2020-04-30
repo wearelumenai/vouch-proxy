@@ -3,16 +3,41 @@ services:
   clusauth:
     build:
       context: ${CLUSAUTH_CONTEXT-../}
-      dockerfile: ${CLUSAUTH_DOCKERFILE-./build/Dockerfile}
+      dockerfile: ./build/Dockerfile
+      target: dev
+    restart: always
     image: ${CLUSAUTH_IMAGE-clusauth:dev}
     container_name: ${CLUSAUTH_CONTAINER-clusauth-dev}
-    ports:
-      - ${CLUSAUTH_PORT-8003}:9090
-    restart: always
+    environment:
+      CLUSAUTH_ENDPOINT: ${CLUSAUTH_ENDPOINT-http://clusauth:8003}
+      CLUSAUTH_CERTFILE: ${CLUSAUTH_CERTFILE-}
+      CLUSAUTH_KEYFILE: ${CLUSAUTH_KEYFILE-}
+      CLUSAUTH_SENTRY: ${CLUSAUTH_SENTRY-}
+      CLUSAUTH_TIMEOUT: ${CLUSAUTH_TIMEOUT-180}
+      CLUSAUTH_DOMAINS: ${CLUSAUTH_DOMAINS-lakelady.fr,localhost}
+      CLUSAUTH_TOKENS: ${CLUSAUTH_TOKENS-}
+      CLUSAUTH_SECRET: ${CLUSAUTH_SECRET-clusauth}
+      CLUSAUTH_DEBUG: ${CLUSAUTH_DEBUG-false}
+      CLUSAUTH_VOUCH_ENDPOINT: ${CLUSAUTH_VOUCH_ENDPOINT-http://clusauth-vouch:9090}
     volumes:
-      - ${CLUSAUTH_CONTEXT-../}handlers/:/go/src/github.com/vouch/vouch-proxy/handlers/
-      - ${CLUSAUTH_CONTEXT-../}pkg/:/go/src/github.com/vouch/vouch-proxy/pkg/
-      - ${CLUSAUTH_CONTEXT-../}static/:/go/src/github.com/vouch/vouch-proxy/static/
-      - ${CLUSAUTH_CONTEXT-../}templates/:/go/src/github.com/vouch/vouch-proxy/templates/
-      - ${CLUSAUTH_CONFIG-../config/}:/go/src/github.com/vouch/vouch-proxy/config/
-      - ${CLUSAUTH_DATA-../data/}:/go/src/github.com/vouch/vouch-proxy/data/
+      - ${CLUSAUTH_CONFIGS-../configs/}:/app/clusauth/configs/
+      - ${CLUSAUTH_INTERNAL-../internal/}:/app/clusauth/internal/
+      - ${CLUSAUTH_MAIN-../main.go}:/app/clusauth/main.go
+    ports:
+      - ${CLUSAUTH_PORT-8003}:8003
+  clusauth-vouch:
+    build:
+      context: ${CLUSAUTH_CONTEXT-../}
+      dockerfile: ./build/Dockerfile.vouch
+      target: prod
+    image: ${CLUSAUTH_VOUCH_IMAGE-clusauth-vouch}
+    container_name: ${CLUSAUTH_VOUCH_CONTAINER-clusauth-vouch}
+    restart: always
+    environment:
+      VOUCH_CONFIG: ${VOUCH_CONFIG-/config/config.dev.yml}
+    volumes:
+      - ${CLUSAUTH_CONFIGS-../configs/}:/config/
+      - ${CLUSAUTH_DATA-../data/}:/data/
+      - ${CLUSAUTH_CONTEXT-../}static/:/static/
+      - ${CLUSAUTH_CONTEXT-../}templates/:/templates/
+    # remember to set host for jwt: proxy_set_header Host $http_host;

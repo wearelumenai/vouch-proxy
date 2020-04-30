@@ -1,18 +1,4 @@
-# config/config.yml
-data/lasso_bolt.db
-pkg/model/storage-test.db
-main
-config/google_config.json
-.vscode/*
-lasso
-config/config.yml_google
-config/config.yml_github
-config/secret
-config/config.yml_orig
-.dockerignore
-Dockerfile
-handlers/rice-box.go
-build
-deployments
-vouch-proxy
-lumenai
+.github
+data
+Makefile
+README.md
