@@ -3,7 +3,7 @@
 # you should probably start with one of the other configs in the example directory
 # vouch proxy does a fairly good job of setting its config to sane defaults
 
-# be aware of your indentation, the only top level elements are `vouch` and `oauth`. 
+# be aware of your indentation, the only top level elements are `vouch` and `oauth`.
 
 vouch:
   # logLevel: debug
@@ -20,17 +20,19 @@ vouch:
   # each of these domains must serve the url https://vouch.$domains[0] https://vouch.$domains[1] ...
   # so that the cookie which stores the JWT can be set in the relevant domain
   # you usually *don't* want to list every individual website that will be protected
-  # if you have siteA.internal.yourdomain.com and siteB.internal.yourdomain.com 
-  # then your domains should be set as yourdomain.com or perhaps internal.yourdomain.com   
+  # if you have siteA.internal.yourdomain.com and siteB.internal.yourdomain.com
+  # then your domains should be set as yourdomain.com or perhaps internal.yourdomain.com
   # usually you'll just have one.
   # Comment `domains:` out if you set allowAllUser:true
   domains:
   - lakelady.fr
+  - localhost
+  - lumenai.fr
 
   # set allowAllUsers: true to use Vouch Proxy to just accept anyone who can authenticate at the configured provider
   # allowAllUsers: true
 
-  # Setting publicAccess: true will accept all requests, even without a cookie. 
+  # Setting publicAccess: true will accept all requests, even without a cookie.
   # If the user is logged in, the cookie will be validated and the user header will be set.
   # You will need to direct people to the Vouch Proxy login page from your application.
   publicAccess: true
@@ -57,7 +59,7 @@ vouch:
     # compress the jwt
     compress: true
 
-  cookie: 
+  cookie:
     # name of cookie to store the jwt
     name: ClusauthCookie
     # optionally force the domain of the cookie to set
@@ -90,9 +92,9 @@ vouch:
     # success: X-Clusauth-Success # success header
 
     # GENERAL WARNING ABOUT claims AND tokens
-    # all of these config elements can cause performance impacts due to the amount of information being 
-    # moved around.  They will get added to the Vouch cookie and (possibly) make it large.  The Vouch cookie will 
-    # get split up into several cookies. Every request will process the cookies in order to extract and create the 
+    # all of these config elements can cause performance impacts due to the amount of information being
+    # moved around.  They will get added to the Vouch cookie and (possibly) make it large.  The Vouch cookie will
+    # get split up into several cookies. Every request will process the cookies in order to extract and create the
     # additional headers which get returned.  But if you need it, you need it.
     # With large cookies and headers it will require additional nginx config to open up the buffers a bit..
     # see `large_client_header_buffers` http://nginx.org/en/docs/http/ngx_http_core_module.html#large_client_header_buffers
@@ -109,7 +111,7 @@ vouch:
     # X-Vouch-IdP-Claims-Given-Name
     # see https://github.com/vouch/vouch-proxy/issues/183 regarding claims and header naming
 
-    # claimheader - Customizable claim header prefix (instead of default `X-Vouch-IdP-Claims-`) 
+    # claimheader - Customizable claim header prefix (instead of default `X-Vouch-IdP-Claims-`)
     # claimheader: My-Custom-Claim-Prefix
 
     # accesstoken - Pass the user's access token from the provider.  This is useful if you need to pass the IdP token to a downstream

@@ -18,6 +18,8 @@ WORKDIR /app/clusauth
 
 COPY --from=base /app/clusauth .
 
+RUN go get -v -u github.com/jinzhu/configor@v1.2.0
+
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o clusauth .
 
 FROM scratch AS prod
