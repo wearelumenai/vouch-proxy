@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: textbook/git-checkout-submodule-action@master
       - name: clusauth@docker
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: wearelumenai/clusauth/clusauth
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -25,7 +25,7 @@ jobs:
           tag_semver: true
           buildoptions: "--compress"
       - name: clusauth-vouch@docker
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: wearelumenai/clusauth/clusauth-vouch
           username: ${{ secrets.DOCKER_USERNAME }}
